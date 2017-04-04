@@ -9,10 +9,16 @@ int motorPWM[] = { 0, 0 };
 int main(int argc, char*argv[]) {
 	init();
 
+	rotate(0, 10, 1);
+	for (int i = 0; i < 100000; i++) {}
+	stop(0);
+
 }
 
 int init() {
 	wiringPiSetupGpio();
+
+	//h-bridge
 
 	for (int i = 0; i < 2; i++) {
 		pinMode(motorEnableA[i], OUTPUT);
