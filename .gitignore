@@ -1,3 +1,22 @@
+#my stuff
+wiringPi-96344ff/
+
+#visual studios
+*.sln
+*.sdf
+*.opensdf
+*.vcxproj
+*.vcxproj.filters
+*.suo
+
+
+
+
+
+
+
+
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
