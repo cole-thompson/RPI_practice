@@ -15,7 +15,7 @@ int initHbridge() {
 		pinMode(motorPWM[i], OUTPUT);
 	}
 
-	fprintf(stderr, "h-bridge gpio initialized");
+	fprintf(stderr, "h-bridge gpio initialized\n");
 }
 
 void setSpeed(int motor_number, int speed) {

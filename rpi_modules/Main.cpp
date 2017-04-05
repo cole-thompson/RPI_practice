@@ -3,10 +3,16 @@
 
 int main(int argc, char*argv[]) {
 	initHbridge();
-
-	rotate(0, 1);
+	
 	setSpeed(0, 10);
-	for (int i = 0; i < 100000; i++) {}
+	
+	rotate(0, 1);
+	for (int i = 0; i < 100000000; i++) {}
+	
+	rotate(0, 0);
+	for (int i = 0; i < 100000000; i++) {}
+	
+	
 	stop(0);
-
+	fprintf(stderr, "motors stopped\n");
 }
