@@ -8,7 +8,7 @@ private:
 	void counter_clockwise();
 	int motorEnableA, motorEnableB, motorPWM;
 public:
-	HBridgeMotor::HBridgeMotor(int motorEnableAPin, int motorEnableBPin, int motorPWMPin);
+	HBridgeMotor(int motorEnableAPin, int motorEnableBPin, int motorPWMPin);
 	void rotate(int dir);
 	void setSpeed(int speed);
 	void stop();

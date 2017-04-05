@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <vector>
+#include <wiringPi.h>
 #include "hbridge.h"
-
 
 
 int motorEnableA[] = { 5, 13 };
