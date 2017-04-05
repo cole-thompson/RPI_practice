@@ -1,9 +1,18 @@
 #ifndef HBRIDGE
 #define HBRIDGE
 
-int initHbridge();
-void rotate(int motor_number, int dir);
-void setSpeed(int motor_number, int speed);
-void stop(int motor_number);
+
+class HBridgeMotor {
+private:
+	void clockwise();
+	void counter_clockwise();
+	int motorEnableA, motorEnableB, motorPWM;
+public:
+	HBridgeMotor::HBridgeMotor(int motorEnableAPin, int motorEnableBPin, int motorPWMPin);
+	void rotate(int dir);
+	void setSpeed(int speed);
+	void stop();
+};
+
 
 #endif
