@@ -54,7 +54,7 @@ void imuTest() {
 		int accelY = imu.accelY();
 		int accelZ = imu.accelZ();
 
-		printf("gyro: x%d y%d z%d \t| accel: x%d y%d z%d", gyroX, gyroY, gyroZ, accelX, accelY, accelZ);
+		printf("gyro: x%d y%d z%d \t| accel: x%d y%d z%d\n", gyroX, gyroY, gyroZ, accelX, accelY, accelZ);
 		delay(500);
 	}
 }

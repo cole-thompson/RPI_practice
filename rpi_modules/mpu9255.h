@@ -3,7 +3,7 @@
 
 class mpu9255 {
 private:
-	
+	int fd;	
 public:
 	mpu9255();
 
