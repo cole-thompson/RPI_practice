@@ -29,10 +29,10 @@ HBridgeMotor::HBridgeMotor(int motorEnableAPin, int motorEnableBPin, int motorPW
 
 void HBridgeMotor::setSpeed(int speed) {
 	if (0 < speed <= 1000) {
-		softPwmWrite(motorPWM, speed)
+		softPwmWrite(motorPWM, speed);
 	}
 	else {
-		softPwmWrite(motorPWM, 0)
+		softPwmWrite(motorPWM, 0);
 	}
 }
 
