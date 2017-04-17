@@ -19,7 +19,7 @@ HBridgeMotor::HBridgeMotor(int motorEnableAPin, int motorEnableBPin, int motorPW
 	for (int i = 0; i < 2; i++) {
 		pinMode(motorEnableA, OUTPUT);
 		pinMode(motorEnableB, OUTPUT);
-		pinMode(motorPWM, OUTPUT);
+		softPwmCreate(motorPWM, 0, 1000);
 	}
 
 	fprintf(stderr, "h-bridge motor gpio initialized\n");
@@ -28,12 +28,10 @@ HBridgeMotor::HBridgeMotor(int motorEnableAPin, int motorEnableBPin, int motorPW
 
 void HBridgeMotor::setSpeed(int speed) {
 	if (0 < speed <= 1000) {
-		digitalWrite(motorPWM, HIGH);
-		//wiringpi.softPwmWrite(pins.motorPWM[motor_number], speed)
+		softPwmWrite(motorPWM, speed)
 	}
 	else {
-		digitalWrite(motorPWM, LOW);
-		//wiringpi.softPwmWrite(pins.motorPWM[motor_number], 0)
+		softPwmWrite(motorPWM, 0)
 	}
 }
 

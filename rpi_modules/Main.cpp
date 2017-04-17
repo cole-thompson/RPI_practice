@@ -2,6 +2,7 @@
 #include <vector>
 #include <wiringPi.h>
 #include "hbridge.h"
+#include "mpu9255.h"
 
 
 int motorEnableA[] = { 5, 13 };
@@ -16,21 +17,41 @@ int main(int argc, char*argv[]) {
 		wiringPiSetupGpio();
 	#endif
 
+	imuTest();
+	//motorTest();
+}
 
+void motorTest() {
 	std::vector<HBridgeMotor> motors;
 	for (int i = 0; i < 2; i++) {
 		motors.push_back(HBridgeMotor(motorEnableA[i], motorEnableB[i], motorPWM[i]));
 	}
 
-	motors[0].setSpeed(10);
+	motors[0].setSpeed(500);
 	motors[0].rotate(1);
 
 	for (int i = 0; i < 100000000; i++) {}
-	
+
 	motors[0].rotate(0);
 	for (int i = 0; i < 100000000; i++) {}
-	
-	
+
+
 	motors[0].stop();
 	fprintf(stderr, "motors stopped\n");
+
+}
+
+void imuTest() {
+	mpu9255 imu = mpu9255();
+	while (true) {
+		int gyroX = imu.gyroX();
+		int gyroY = imu.gyroY();
+		int gyroZ = imu.gyroZ();
+		int accelX = imu.accelX();
+		int accelY = imu.accelY();
+		int accelZ = imu.accelZ();
+
+		printf("gyro: x%d y%d z%d \t| accel: x%d y%d z%d", gyroX, gyroY, gyroZ, accelX, accelY, accelZ);
+		delay(500);
+	}
 }
