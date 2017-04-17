@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "hbridge.h"
 #include <wiringPi.h>
+#include <softPwm.h>
 
 
 

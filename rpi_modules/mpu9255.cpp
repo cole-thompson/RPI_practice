@@ -8,6 +8,7 @@
 //int wiringPiI2CWrite(int fd, int data);
 //wiringPiI2CWriteReg8(fd, data);
 //wiringPiI2CReadReg8(fd);
+//negative return is error
 
 
 //REGISTERS
@@ -49,23 +50,23 @@ mpu9255::mpu9255() {
 	//write to registers to set up (datasheet)
 
 	//reset imu
-	wiringPiI2CWriteReg8(PWR_MGMT_1, 0x80);
+	wiringPiI2CWriteReg8(DEVID, PWR_MGMT_1, 0x80);
 	delay(100);
-	wiringPiI2CWriteReg8(PWR_MGMT_1, 0x00);
+	wiringPiI2CWriteReg8(DEVID, PWR_MGMT_1, 0x00);
 	
 	//make sure the imu is a mpu9255
-	int id = wiringPiI2CReadReg8(MPU9255_WHO_AM_I);
+	int id = wiringPiI2CReadReg8(DEVID, MPU9255_WHO_AM_I);
 	if (id != MPU9255_ID) {
 		fprintf(stderr, "error, not the right kind of imu\n");
 	}
 	
 	//gyro init
-	wiringPiI2CWriteReg8(GYRO_CONFIG, 0x00);
-	wiringPiI2CWriteReg8(GYRO_LPF, 0x00);		//low pass filter
+	wiringPiI2CWriteReg8(DEVID, GYRO_CONFIG, 0x00);
+	wiringPiI2CWriteReg8(DEVID, GYRO_LPF, 0x00);		//low pass filter
 
 	//accel init
-	wiringPiI2CWriteReg8(ACCEL_CONFIG, 0x00);
-	wiringPiI2CWriteReg8(ACCEL_LPF, 0x00);		//low pass filter
+	wiringPiI2CWriteReg8(DEVID, ACCEL_CONFIG, 0x00);
+	wiringPiI2CWriteReg8(DEVID, ACCEL_LPF, 0x00);		//low pass filter
 
 
 
@@ -75,8 +76,8 @@ mpu9255::mpu9255() {
 	//compass init ("external sensor" registers in datasheet)
 
 	//enable accel and gyro
-	wiringPiI2CWriteReg8(PWR_MGMT_1, 0x01); 
-	wiringPiI2CWriteReg8(PWR_MGMT_2, 0x00); 
+	wiringPiI2CWriteReg8(DEVID, PWR_MGMT_1, 0x01);
+	wiringPiI2CWriteReg8(DEVID, PWR_MGMT_2, 0x00);
 
 	//fifo set up
 	fprintf(stderr, "mpu9255 initialized\n");
@@ -85,29 +86,29 @@ mpu9255::mpu9255() {
 
 
 double mpu9255::accelX() {
-	return wiringPiI2CReadReg8(ACCEL_XOUT_H);
+	return wiringPiI2CReadReg8(DEVID, ACCEL_XOUT_H);
 }
 
 double mpu9255::accelY() {
-	return wiringPiI2CReadReg8(ACCEL_YOUT_H);
+	return wiringPiI2CReadReg8(DEVID, ACCEL_YOUT_H);
 }
 
 double mpu9255::accelZ() {
-	return wiringPiI2CReadReg8(ACCEL_ZOUT_H);
+	return wiringPiI2CReadReg8(DEVID, ACCEL_ZOUT_H);
 }
 
 
 
 double mpu9255::gyroX() {
-	return wiringPiI2CReadReg8(GYRO_XOUT_H);
+	return wiringPiI2CReadReg8(DEVID, GYRO_XOUT_H);
 }
 
 double mpu9255::gyroY() {
-	return wiringPiI2CReadReg8(GYRO_YOUT_H);
+	return wiringPiI2CReadReg8(DEVID, GYRO_YOUT_H);
 }
 
 double mpu9255::gyroZ() {
-	return wiringPiI2CReadReg8(GYRO_ZOUT_H);
+	return wiringPiI2CReadReg8(DEVID, GYRO_ZOUT_H);
 }
 
 

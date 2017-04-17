@@ -9,6 +9,9 @@ int motorEnableA[] = { 5, 13 };
 int motorEnableB[] = { 6, 19 };
 int motorPWM[] = { 20, 21 };
 
+void motorTest();
+void imuTest();
+
 
 int main(int argc, char*argv[]) {
 	//some basic assurance that wiringpi setup is only called once
