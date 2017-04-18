@@ -46,6 +46,7 @@ void motorTest() {
 
 void imuTest() {
 	mpu9255 imu = mpu9255();
+	imu.read();
 	while (true) {
 		int gyroX = imu.gyroX();
 		int gyroY = imu.gyroY();

@@ -20,6 +20,8 @@ public:
 	double compassX();
 	double compassY();
 	double compassZ();
+
+	void read();
 };
 
 

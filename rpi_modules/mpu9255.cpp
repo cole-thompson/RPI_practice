@@ -3,7 +3,8 @@
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
 
-//https://projects.drogon.net/raspberry-pi/wiringpi/i2c-library/
+//very simple, just reads from data registers, not accurate yet
+//rpi i2c stuff https://projects.drogon.net/raspberry-pi/wiringpi/i2c-library/
 //int wiringPiI2CRead(int fd, int reg);
 //int wiringPiI2CWrite(int fd, int reg, int data);
 //wiringPiI2CWriteReg8(fd, reg, data);
@@ -88,6 +89,13 @@ double mpu9255::readHighLowData(int regH, int regL) {
 	data = data << 8;
 	data += wiringPiI2CReadReg8(fd, regL);
 	return data;
+}
+
+void mpu9255::read() {
+	while (true) {
+		int data = wiringPiI2CRead(fd);
+		printf("data: %d", data);
+	}
 }
 
 double mpu9255::accelX() {
