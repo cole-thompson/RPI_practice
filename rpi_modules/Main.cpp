@@ -46,7 +46,6 @@ void motorTest() {
 
 void imuTest() {
 	mpu9255 imu = mpu9255();
-	imu.read();
 	while (true) {
 		int gyroX = imu.gyroX();
 		int gyroY = imu.gyroY();
@@ -56,6 +55,6 @@ void imuTest() {
 		int accelZ = imu.accelZ();
 
 		printf("gyro: x%d y%d z%d \t| accel: x%d y%d z%d\n", gyroX, gyroY, gyroZ, accelX, accelY, accelZ);
-		delay(500);
+		delay(100);
 	}
 }
