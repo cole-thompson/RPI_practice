@@ -4,15 +4,15 @@
 #include <wiringPiI2C.h>
 
 //https://projects.drogon.net/raspberry-pi/wiringpi/i2c-library/
-//int wiringPiI2CRead(int fd);
-//int wiringPiI2CWrite(int fd, int data);
-//wiringPiI2CWriteReg8(fd, data);
-//wiringPiI2CReadReg8(fd);
+//int wiringPiI2CRead(int fd, int reg);
+//int wiringPiI2CWrite(int fd, int reg, int data);
+//wiringPiI2CWriteReg8(fd, reg, data);
+//wiringPiI2CReadReg8(fd, reg);
 //negative return is error
 
 
 //REGISTERS
-#define DEVID				0x68
+#define IMU_I2C_ID			0x68
 #define MPU9255_WHO_AM_I	0x75
 #define MPU9255_ID			0x73
 
@@ -42,7 +42,7 @@
 
 
 mpu9255::mpu9255() {
-	fd = wiringPiI2CSetup(DEVID); 
+	fd = wiringPiI2CSetup(IMU_I2C_ID); 
 	if (fd < 0) {
 		//error
 		fprintf(stderr, "error initializing i2c\n");
@@ -71,8 +71,7 @@ mpu9255::mpu9255() {
 
 
 
-	//sample rate 
-	//wiringPiI2CWriteReg8(SMPRT_DIV, data);
+	//sample rate SMPRT_DIV
 
 	//compass init ("external sensor" registers in datasheet)
 
@@ -84,32 +83,37 @@ mpu9255::mpu9255() {
 	fprintf(stderr, "mpu9255 initialized\n");
 }
 
-
+double readHighLowData(int regH, int regL) {
+	int data = wiringPiI2CReadReg8(fd, reg);
+	data = data << 8;
+	data += wiringPiI2CReadReg8(fd, reg);
+	return data;
+}
 
 double mpu9255::accelX() {
-	return wiringPiI2CReadReg8(fd, ACCEL_XOUT_H);
+	return readHighLowData(ACCEL_XOUT_H, ACCEL_XOUT_L);
 }
 
 double mpu9255::accelY() {
-	return wiringPiI2CReadReg8(fd, ACCEL_YOUT_H);
+	return readHighLowData(ACCEL_YOUT_H, ACCEL_YOUT_L);
 }
 
 double mpu9255::accelZ() {
-	return wiringPiI2CReadReg8(fd, ACCEL_ZOUT_H);
+	return readHighLowData(ACCEL_ZOUT_H, ACCEL_ZOUT_L);
 }
 
 
 
 double mpu9255::gyroX() {
-	return wiringPiI2CReadReg8(fd, GYRO_XOUT_H);
+	return readHighLowData(GYRO_XOUT_H, GYRO_XOUT_L);
 }
 
 double mpu9255::gyroY() {
-	return wiringPiI2CReadReg8(fd, GYRO_YOUT_H);
+	return readHighLowData(GYRO_YOUT_H, GYRO_YOUT_L);
 }
 
 double mpu9255::gyroZ() {
-	return wiringPiI2CReadReg8(fd, GYRO_ZOUT_H);
+	return readHighLowData(GYRO_ZOUT_H, GYRO_ZOUT_L);
 }
 
 
