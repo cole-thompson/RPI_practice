@@ -91,29 +91,29 @@ double mpu9255::readHighLowData(int regH, int regL) {
 }
 
 double mpu9255::accelX() {
-	return readHighLowData(ACCEL_XOUT_H, ACCEL_XOUT_L);
+	return wiringPiI2CReadReg16(fd, ACCEL_XOUT_H);
 }
 
 double mpu9255::accelY() {
-	return readHighLowData(ACCEL_YOUT_H, ACCEL_YOUT_L);
+	return wiringPiI2CReadReg16(fd, ACCEL_YOUT_H);
 }
 
 double mpu9255::accelZ() {
-	return readHighLowData(ACCEL_ZOUT_H, ACCEL_ZOUT_L);
+	return wiringPiI2CReadReg16(fd, ACCEL_ZOUT_H);
 }
 
 
 
 double mpu9255::gyroX() {
-	return readHighLowData(GYRO_XOUT_H, GYRO_XOUT_L);
+	return wiringPiI2CReadReg16(fd, GYRO_XOUT_H);
 }
 
 double mpu9255::gyroY() {
-	return readHighLowData(GYRO_YOUT_H, GYRO_YOUT_L);
+	return wiringPiI2CReadReg16(fd, GYRO_YOUT_H);
 }
 
 double mpu9255::gyroZ() {
-	return readHighLowData(GYRO_ZOUT_H, GYRO_ZOUT_L);
+	return wiringPiI2CReadReg16(fd, GYRO_ZOUT_H);
 }
 
 
