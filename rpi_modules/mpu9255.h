@@ -4,6 +4,8 @@
 class mpu9255 {
 private:
 	int fd;	
+	double readHighLowData(int regH, int regL);
+
 public:
 	mpu9255();
 

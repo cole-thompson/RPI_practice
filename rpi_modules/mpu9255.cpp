@@ -83,10 +83,10 @@ mpu9255::mpu9255() {
 	fprintf(stderr, "mpu9255 initialized\n");
 }
 
-double readHighLowData(int regH, int regL) {
-	int data = wiringPiI2CReadReg8(fd, reg);
+double mpu9255::readHighLowData(int regH, int regL) {
+	int data = wiringPiI2CReadReg8(fd, regH);
 	data = data << 8;
-	data += wiringPiI2CReadReg8(fd, reg);
+	data += wiringPiI2CReadReg8(fd, regL);
 	return data;
 }
 
